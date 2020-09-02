@@ -34,7 +34,7 @@ class Gem {
         do {
             // if thrown exception, this text will bo not printing
             if (!isIncorrectInput) {
-                System.out.print("Выберите один из вариантов форм камней, введя цифру:\n");
+                System.out.print("Select one of the options for the gem's form by entering a number:\n");
             }
             // iterates the gem's formes array and prints by three on the line
             // it is can make better, but I don't want, cause I plan remake console's interface to other
@@ -50,7 +50,7 @@ class Gem {
             try {
                 gemFormNumber = scanner.nextInt();
             } catch (Exception e) {
-                System.err.print("Введите ЦИФРУ для выбора соответствующего варианта\n");
+                System.err.print("Enter the NUMBER to select the appropriate option\n");
                 gemFormNumber = 0;
                 isIncorrectInput = true;
                 continue;
