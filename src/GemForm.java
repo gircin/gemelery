@@ -1,28 +1,26 @@
-package gem;
-
-/** В этом перечислении определяется перечень форм камней
- * (либо в дальнейшем - типов вставок).
- * От формы камня зависит какие его параметры будут определяться:
- * ширина, длина, высота
+/** This enum contain gem forms
+ * (or hereinafter - types of inserts in jewelery).
+ * The form of the gem influences its measured parameters will be determined:
+ * Width Length Height
  *
- * Так же от формы камня зависит формура вычисления его объёма, который нужен для
- * определения веса камня
- * Вес камня = Объём * Плотность
- * ИЛИ
- * Вторым вариантом вычисления веса камня может быть использование существующих таблиц,
- * которые содержат данные измереных камней с их размерами, цветом и весом.
+ * Also, the form of calculating its volume, which is needed for
+ * calculating the weight of the stone
+ * Stone weight = Volume * Density
+ * OR
+ * The second option for calculating the weight of a stone can be using existing tables,
+ * which contain the data of the measured stones with their size, color and weight.
  *
- * Наилучшим вариантом будет использование комплексного подхода,
- * т.е. определение веса камня по таблице, когда в ней содержатся данные (+- 1 мм),
- * а если в таблице отсутствуют данные, то подстчёт объёма и веса по формуле
+ * The best option would be to use an integrated approach,
+ * i.e. finding of the weight of the stone according to the table, when it contains correct data (+- 1 mm),
+ * and if there is no data in the table, then the volume and weight are calculated by the formula
  *
- * Данный класс инкапсулирует данные только об ограниченном списке форм.
- * Для определения размеров конкретной формы объект данного класса
- * передаётся в класс GemSize
+ * This class contain data for a limited list of forms only.
+ * To find out the size of a certain gem's form, an object of this class
+ * is passed to the GemSize class
  */
 enum GemForm {
     ROUND("Круглый"),
-    SPHERE("Бусина"), // только жемчуг?
+    SPHERE("Бусина"), // maybe only perl?
     OVAL("Овал"),
     CABOCHON("Кабошон"),
     BAGUETTE("Багет"),
@@ -32,8 +30,8 @@ enum GemForm {
     TRIANGLE("Треугольник");
     //ANOTHER("Another");
 
-    //TODO тип картинки, иконки или типа того
-    // сейчас это текстовое описание формы камня
+    //TODO pic type, like a favicon or something like
+    // it is a text description for easiest debug
     String ruName;
     GemForm(String pic) {
         this.ruName = pic;
@@ -44,7 +42,7 @@ enum GemForm {
         return ruName;
     }
 
-    // Константа, которая инициализируется при загрузке класса
-    // Введена для отслеживания изменения количества форм
+    // Constant that is initialized when the class is loaded
+    // Created to track changes in the number of forms
     public static final int formsQuantity = values().length;
 }
