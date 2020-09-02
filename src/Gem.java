@@ -53,7 +53,6 @@ class Gem {
                 System.err.print("Enter the NUMBER to select the appropriate option\n");
                 gemFormNumber = 0;
                 isIncorrectInput = true;
-                continue;
             }
         } while (gemFormNumber < 1 || gemFormNumber > gemForms.length);
         return gemForms[gemFormNumber - 1];
