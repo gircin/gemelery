@@ -29,11 +29,11 @@ enum GemForm {
     SQUARE("Square"),
     HEART("Heart"),
     TRIANGLE("Triangre");
-    //ANOTHER("Another");
+    //ANOTHER("Another"); // for testing exception throwing
 
     //TODO pic type, like a favicon or something like
     // it is a text description for easiest debug
-    String ruName;
+    String ruName; // is a RU, cause I'm a actually russian-speaker
     GemForm(String pic) {
         this.ruName = pic;
     }
