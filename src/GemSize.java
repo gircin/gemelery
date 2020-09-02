@@ -1,124 +1,122 @@
-package gem;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Данный класс представляет абстрактные параметры камней,
- * которые нужны для вычисления веса.
- * Есть три базовых параметра - ширина, длина, высота.
- * Однако для некоторых камней нет смысла измерять все три параметра.
- * Например, для бусин (жемчуга) актуальна только ширина, она же диаметр.
- * Круглые, треугольные, квадратные камни имеют одинаковую длину и ширину, поэтому
- * достаточно указать только ширину.
+ * This class represents size's parameters of stones,
+ * which are needed to calculate the volume.
+ * There are three basic parameters - width, length, height.
+ * However, for some stones it makes no sense to measure all of this three.
+ * For example, for beads (pearls), only the width is relevant, and this is a diameter.
+ * Round, triangular, square gems has the same length and width, so
+ * just can input the width.
  *
- * В базовой версии размер сторон будет указываться как целое число int, в миллиметрах.
- * Если возникнет необходимость, то можно будет изменить на double.
- * Значение стороны должно быть в пределах от 1 до 60 включительно
+ * In the basic version, the size of the sides will be indicated as an int, in millimeters.
+ * If necessary, it can be changed to double.
+ * Side's value must be between 1 and 60 inclusive
  */
 class GemSize {
     private String[] dimensionsName;
     private int[] gemsSizes;
 
-    // TODO: геттер для получения отладочной информации
+    // TODO: delete getter for debugging information
     public String getSizes() {
         return Arrays.toString(gemsSizes);
     }
-    // константа для контроля изменений типов форм камней и конструктора данного класса
+    // Constant to track changes in the types of forms and this class constructor
     public static final int formsQuantity = 9;
 
-    /** Конструктор принимает переменную формы камня
-     * и согласно ей определяет сколько параметров будет содержать камень.
-     * Количество параметров - длина массива gemsSizes.
-     * Сами параметры хранятся в массиве, по-умолчанию их значение равно 0
+    /** The constructor takes a variable of the gem's form
+     * and according to it defines how many parameters the gem will contain.
+     * The number of parameters is the length of the gemsSizes array.
+     * The parameters themselves are stored in an array, by default their value is 0
      *
-     * ВАЖНО!!! При изменении списка форм камней его нужно вносить в данный конструктор.
-     * Для отслеживания количества форм введены константы в этом классе и классе GemForm.
-     * В классе GemForm константа вычисляется при инициализации программы. Её значение равно
-     * количеству переменных форм.
-     * В данном классе константа инициализируется вручную и изменяется вручную при внесении
-     * изменений в конструктор.
-     * Константы сравниваются при инициализации конструктора и в случае их различия будет
-     * сгенерировано собственное unchecked-исключение ConstructorNotChangedException с комментарием
+     * WARNING!!! When changing the GemForm enum, changes must be also input into this constructor.
+     * Constants that introduced in this class and the GemForm class may track the number of forms.
+     * In the GemForm class, the constant is calculated during program initialization.
+     * Its value is the amount of GemForm enum .
+     * In this class, the constant is initialized and changed manually when introduced
+     * changes to the constructor.
+     * Constants are compared during constructor initialization, and if they differ, it will be
+     * thrown its own unchecked ConstructorNotChangedException with comment
      */
     GemSize(GemForm gemForm) {
-        // сравнение констант и генерация исключения
+        // comparing constant values and throwing an exception
         if (formsQuantity != GemForm.formsQuantity)
             throw new ConstructorNotChangedException(
-                    "Количество форм камней в классе GemForm" +
-                    " не соответствует таковому в конструкторе GemDimensions");
+                    "The amount of gem's form in the GemForm class" +
+                    " does not match that in the GemDimensions constructor");
         switch (gemForm) {
-            case SPHERE: // бусины только диаметр
+            case BEAD: // only a diameter for a beads 
                 gemsSizes = new int[]{0};
                 break;
             case ROUND:
-            case CUBE:
-            case TRIANGLE: // круглые, квадратные, треугольные - ширина и высота
+            case SQUARE:
+            case TRIANGLE: // round, square, triangle - width and height
                 gemsSizes = new int[]{0, 0};
                 break;
             case OVAL:
             case CABOCHON:
             case BAGUETTE:
             case MARQUIS:
-            case HEART:  // овалы, кабошоны, багеты, маркизы, сердца - длина, ширина и высота
+            case HEART:  // oval, cabochon, baguette, marquis, heart - length, width and height
                 gemsSizes = new int[]{0, 0, 0};
                 break;
         }
-        // инициализирует ввод размеров камня
+        // initialization of input of gem's sizes
         enterGemsSize();
     }
 
-    /** Данный метод подключает ввод из консоли и
-     * инициализирует вывод списка соответствующих параметров.
-     * Так же метод выполняет проверку этих параметров на соответствие размерам от 1 до 60
-     * и сохраняет размеры сторон в массив gemsSizes
-     * Метод приватный, т.к. используется в основном вызываемом метод enterGemsSize
-     */
+    /** This method connect input from the console and
+      * initializes the output of the list of matching parameters.
+      * The method also checks these parameters for compliance with sizes from 1 to 60
+      * and stores the sizes of the sides in the gemsSizes array
+      * The method is private, because used in the main called enterGemsSize method
+      */
     private void sizeInput() {
         boolean isIncorrectInput = false;
         for (int i = 0; i < gemsSizes.length; i++) {
             do {
                 Scanner scanner = new Scanner(System.in);
                 if (!isIncorrectInput)
-                    System.out.println("Укажите " + dimensionsName[i] + " в миллиметрах целым числом:");
+                    System.out.println("Enter " + dimensionsName[i] + " as an integer number in millimeters:");
                 try {
                     gemsSizes[i] = scanner.nextInt();
                     if (gemsSizes[i] > 60) {
-                        System.err.println("Нельзя указывать размер более 60 мм");
+                        System.err.println("You can not set a size more than 60 mm");
                         gemsSizes[i] = 0;
                     }
                 } catch (Exception e) {
-                    System.err.print("Введите ЧИСЛО, чтоб указать " + dimensionsName[i] + "\n");
+                    System.err.print("Enter an integer number to set a " + dimensionsName[i] + "\n");
                     gemsSizes[i] = 0;
                     isIncorrectInput = true;
                     continue;
                 }
-             } while (gemsSizes[i] < 1); // изменить значение массива размеров по-умолчанию на 0 и тут тоже на 0
+             } while (gemsSizes[i] < 1);
         }
     }
 
-    /** Основной метод, который выводит запрос определяемых в нём сторон.
-     * Проверяет размер массива, который был инициализирован конструктором
-     * и использует метод sizeInput() для ввода данных из консоли в этот массив
-     *
-     * Данный метод вызывается в конструкторе текущего класса
-     * для получения размеров камня.
-     */
+    /** The main classe's method that output the console's request for its defines gem's sizes.
+      * Checks the array's size that was initialized by the constructor
+      * and uses the sizeInput() method to input data from the console into this array
+      *
+      * This method is called in the constructor of the current class
+      * to get the gem's sizes.
+      */
     public void enterGemsSize() {
         int dimensionsQuantity = gemsSizes.length;
         switch (dimensionsQuantity) {
             case 1: {
-                dimensionsName = new String[]{"ДИАМЕТР"};
+                dimensionsName = new String[]{"DIAMETER"};
                 sizeInput();
                 break;
             }
             case 2: {
-                dimensionsName = new String[]{"ШИРИНУ", "ВЫСОТУ"};
+                dimensionsName = new String[]{"WIDTH", "HEIGHT"};
                 sizeInput();
                 break;
             }
             case 3: {
-                dimensionsName = new String[]{"ДЛИНУ", "ШИРИНУ", "ВЫСОТУ"};
+                dimensionsName = new String[]{"LENGTH", "WIDTH", "HEIGHT"};
                 sizeInput();
                 break;
             }
