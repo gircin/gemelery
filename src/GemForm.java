@@ -21,7 +21,7 @@
 enum GemForm {
     // TODO: add links to gem's form pic
     ROUND("Round"),
-    SPHERE("Perl"),
+    BEAD("Bead"), // maybe just a perls?
     OVAL("Oval"),
     CABOCHON("Cabouchon"),
     BAGUETTE("Baguette"),
