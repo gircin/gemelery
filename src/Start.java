@@ -1,18 +1,14 @@
-package gem;
-
 import java.io.*;
 
 public class Start {
     public static void main(String[] args) throws IOException {
         Gem gem = new Gem();
 
-        // Код далее отладочный, позволяет получить корректность заполняемых данных
-        // Я знаю про дебаг и брейкпоинты, просто пока не привык им комфортно пользоваться :)
-        // узнаём форму камня
+        // Next is the debug code that allows to check the correctness of the entered data.
+        // I know about IDEA debugging tools, just not used to using them comfortably :)
+        // we recognize the gem's form
         System.out.println(gem.getGemForm());
-        // узнаём количество параметров камня
+        // we recognize the gem's sizes
         System.out.println(gem.getGemSize().getSizes());
     }
 }
-
-
