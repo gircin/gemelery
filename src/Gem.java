@@ -1,47 +1,43 @@
-package gem;
-
 import java.util.Scanner;
 
 /**
- * Основной класс, который должен инкапсулировать всю информацию о камне (вставке).
- *
- * Создание объекта инициализирует пользовательский консольный интерфейс для выбора формы и размера камня
- * ---------- в дальнейшем и цвета --------------------
+ * Main class, wich will contain all gem's (jevelery's inserts) data
+ * Creating class object initialize user's console interface to entering gem's forms and sizes
+ * ---------- gem's colors in next relises --------------------
  */
 class Gem {
     private GemForm gemForm;
-    // TODO в релизе сделать приватным
+    // TODO: will delete in realise. Only for debug
     public GemForm getGemForm() { return gemForm; }
 
     private GemSize gemSize;
-    // TODO в релизе сделать приватным
+    // TODO: will delete in realise. Only for debug
     public GemSize getGemSize() { return gemSize; }
 
-     /** Данный метод создаёт поток ввода из консоли,
-      * для выбора формы камня.
-      * Каждое название формы пронумеровано и выбор нужной совешается вводом соответствующей цифры.
+     / ** This method creates an input stream from the console,
+      * to select the shape of the stone.
+      * Each form name is numbered and the choice of the desired one is made by entering the correct number.
       *
-      * Метод генерирует два исключения:
-      * - InputMismatchException если введена не цифра и
-      * - ArrayIndexOutOfBoundException когда после неверно
-      * введённого значения метод пытается получить доступ за предел массива форм камней.
-      * Исключения "проглатываются", формируется предупреждающее сообщение-инструкция
-      * и переменная, которая указывает на индекс массива форм камней обнуляется,
-      * после чего предлагается выбрать форму снова
-      */
+      * The method will can throws two exceptions:
+      * - InputMismatchException if a non-digit is entered
+      * - ArrayIndexOutOfBoundException when after invalid's
+      * entered value, the method tries to access outside the gem's form array.
+      * Exceptions are "swallowed", generating warning message.
+      * Variable that pointing on the array's index is resets and offered to select the gem's form again
+      * /
     private GemForm choseForm(){
-        int gemFormNumber = 0; // хранит значение формы камня
-        GemForm[] gemForms = GemForm.values(); // создаёт массив всех типов камней
-        boolean isIncorrectInput = false; // отслеживает генерацию исключения
+        int gemFormNumber = 0; // contains gem's form number value
+        GemForm[] gemForms = GemForm.values(); // creates gem's form enumerations array
+        boolean isIncorrectInput = false; // tracks exception thrown
 
-        // инициализирует вывод списка с запросом введения номера формы камня
+        // initializes output of the gem's types list and gem's number enter request
         do {
-            // если исключение было сгенерировано, то этот текст не будет напечатан
+            // if thrown exception, this text will bo not printing
             if (!isIncorrectInput) {
                 System.out.print("Выберите один из вариантов форм камней, введя цифру:\n");
             }
-            // перебирает все формы камней, по три в ряд
-            // это можно делать как-то красивее, но я не хочу, т.к. собираюсь переделать консольный интерфейс
+            // iterates the gem's formes array and prints by three on the line
+            // it is can make better, but I don't want, cause I plan remake console's interface to other
             int newLineCounter = 0;
             for (GemForm f : gemForms) {
                 System.out.print((f.ordinal()) + 1 + ". " + f.ruName + "\t\t");
@@ -49,7 +45,7 @@ class Gem {
                 if (newLineCounter % 3 == 0 || newLineCounter == gemForms.length)
                     System.out.println("");
             }
-            // запрашивает ввод символа в консоль
+            // number entering request
             Scanner scanner = new Scanner(System.in);
             try {
                 gemFormNumber = scanner.nextInt();
@@ -63,14 +59,14 @@ class Gem {
         return gemForms[gemFormNumber - 1];
     }
 
-    /** Создание объекта инициализирует запуск методов, которые
-     * открывают поток ввода в консоль для выбора формы, размеров и цвета камня
+    /** Creating an object will initialize methods, which
+     * open console's input stream for choosing gems form, size and color
      */
     Gem() {
-        // вызов метода выбора формы и присвоение значения
+        // method for choosing gem's form
         gemForm = choseForm();
-        // создание нового объекта параметра GemSize, с передачей в него объекта формы.
-        // Создание объекта GemSize инициалзирует ввод данных о его размере в консоль
+        // creating new GemSize object that takes a existing gem's form object
+        // object creating also initializes console's input of the gem's size
         gemSize = new GemSize(getGemForm());
     }
 }
