@@ -14,8 +14,8 @@ class Gem {
     // TODO: will delete in realise. Only for debug
     public GemSize getGemSize() { return gemSize; }
 
-     / ** This method creates an input stream from the console,
-      * to select the shape of the stone.
+     /** This method creates an input stream from the console,
+      * to select the gem's form.
       * Each form name is numbered and the choice of the desired one is made by entering the correct number.
       *
       * The method will can throws two exceptions:
@@ -24,7 +24,7 @@ class Gem {
       * entered value, the method tries to access outside the gem's form array.
       * Exceptions are "swallowed", generating warning message.
       * Variable that pointing on the array's index is resets and offered to select the gem's form again
-      * /
+      */
     private GemForm choseForm(){
         int gemFormNumber = 0; // contains gem's form number value
         GemForm[] gemForms = GemForm.values(); // creates gem's form enumerations array
