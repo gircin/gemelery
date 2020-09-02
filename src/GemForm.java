@@ -1,33 +1,34 @@
 /** This enum contain gem forms
  * (or hereinafter - types of inserts in jewelery).
- * The form of the gem influences its measured parameters will be determined:
- * Width Length Height
+ * The form of the gem influences its measured parameters:
+ * WIDTH, LENGTH, HEIGHT
  *
- * Also, the form of calculating its volume, which is needed for
+ * Also, the gem's form determine of calculating method its volume, which is needed for
  * calculating the weight of the stone
  * Stone weight = Volume * Density
  * OR
  * The second option for calculating the weight of a stone can be using existing tables,
- * which contain the data of the measured stones with their size, color and weight.
+ * which contain the data of the measure gems with their size, color and weight.
  *
  * The best option would be to use an integrated approach,
- * i.e. finding of the weight of the stone according to the table, when it contains correct data (+- 1 mm),
- * and if there is no data in the table, then the volume and weight are calculated by the formula
+ * i.e. finding of the weight of the gem according to the table, when it contains correct data (+- 1 mm),
+ * and if there is no data in the table, then the volume and weight are calculated by the formula.
  *
  * This class contain data for a limited list of forms only.
  * To find out the size of a certain gem's form, an object of this class
  * is passed to the GemSize class
  */
 enum GemForm {
-    ROUND("Круглый"),
-    SPHERE("Бусина"), // maybe only perl?
-    OVAL("Овал"),
-    CABOCHON("Кабошон"),
-    BAGUETTE("Багет"),
-    MARQUIS("Маркиз"),
-    CUBE("Квадрат"),
-    HEART("Сердце"),
-    TRIANGLE("Треугольник");
+    // TODO: add links to gem's form pic
+    ROUND("Round"),
+    SPHERE("Perl"),
+    OVAL("Oval"),
+    CABOCHON("Cabouchon"),
+    BAGUETTE("Baguette"),
+    MARQUIS("Marquis"),
+    SQUARE("Square"),
+    HEART("Heart"),
+    TRIANGLE("Triangre");
     //ANOTHER("Another");
 
     //TODO pic type, like a favicon or something like
